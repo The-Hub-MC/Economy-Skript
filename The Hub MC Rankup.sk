@@ -1,0 +1,50 @@
+command /rankup:
+	aliases: /ru
+	usage: /rankup
+	description &b[&eThe Hub MC&b] &7Use /rankup twice to go to the next rank!
+	permission: rankup.rankup
+	permission message: &4&lSorry!&c but it seems as if you do not have the required permissions to perform this command.
+	trigger:
+		if %player%'s group is "Guest":
+			set group of player to "Member"
+		if %player%'s group is "Member":
+			if 5000 is greater than or equal to {balance.%player%}:
+				set group of player to "Citizen"
+			else:
+				message "&b[&eThe Hub MC&b]&7 You do not have sufficient funds to rankup!"
+		if %player%'s group is "Citizen":
+			if 50000 is greater than or equal to {balance.%player%}:
+				set group of player to "Veteran"
+			else:
+				message "&b[&eThe Hub MC&b]&7 You do not have sufficient funds to rankup!"
+		if %player%'s group is "Veteran":
+			if 500000 is greater than or equal to {balance.%player%}:
+				set group of player to "Tycoon"
+			else:
+				message "&b[&eThe Hub MC&b]&7 You do not have sufficient funds to rankup!"
+		if %player%'s group is "Tycoon":
+			if 5000000 is greater than or equal to {balance.%player%}:
+				set group of player to "GovernementOfficial"
+			else:
+				message "&b[&eThe Hub MC&b]&7 You do not have sufficient funds to rankup!"
+		if %player%'s group is "GovernementOfficial":
+			if 50000000 is greater than or equal to {balance.%player%}:
+				set group of player to "Legend"
+			else:
+				message "&b[&eThe Hub MC&b]&7 You do not have sufficient funds to rankup!"
+command /ranks:
+	aliases: /rank, /rankups
+	usage: /ranks
+	description: &b[&eThe Hub MC&b] &7Do /ranks, /rank, or /rankups to view the ranks and how much the ranks are!
+	permission: rankup.ranks
+	permission message: &4&lSorry!&c but it seems as if you do not have sufficient permissions to perform this command.
+	trigger:
+		message "&7-----&eServer Rankup Ranks&7-----"
+		message "&8[&7Guest&8] &b- &7DEFAULT"
+		message "&8[&eMember&8] &b- &70 Moneys"
+		message "&e[&aCitizen&e] &b- &75,000 Moneys"
+		message "&8[&fVeteran&8] &b- &750,000 Moneys"
+		message "&f{&bT&ay&ec&6o&do&cn&f} &b- &7500,000 Moneys"
+		message "&8[&6Gov. Official&8] &b- &75,000,000 Moneys"
+		message "&1{&3Legend&1} &b- &750,000,000 Moneys"
+		message "&7-----&eServer Rankup Ranks&7-----"
