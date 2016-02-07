@@ -1,0 +1,49 @@
+####################################
+#Made by Jacksonnn                 #
+#© The Hub MC and/or Jacksonnn 2016#
+####################################
+variables:
+	balance.%player% = 0.00
+command /balance <player>:
+	aliases: /bal, /money, /moneys
+	usage: /balance <player>
+	description: "&b[&eThe Hub MC&b] &7Use /bal or /balance to view your balance."
+	permission: balance.balance
+	permission message: "&4&lSorry!&c but it seems as if you do not have the required permissions to perform this command."
+	trigger:
+		if arg-1 is not set:
+			message "&b[&eThe Hub MC&b] &7You currently have %{balance.%player%}% moneys."
+		if arg-1 is set:
+			message "&b[&eThe Hub MC&b] &7%arg 1% currently has %{blance.%player%}% moneys."
+command /pay <player> <integer>:
+	usage: /pay <player> <amount>
+	description: "&b[&eThe Hub MC&b] &7Use /pay (player) (amount) to give a friend some money!"
+	permission: balance.transfer
+	permission message: "&4&lSorry!&c but it seems as if you do not have the required permissions to perform this command."
+	trigger:
+		if arg 2 is less than or equal to {balance.%player%}:
+			subtract arg 2 from {balance.%player%}
+			message "&b[&eThe Hub MC&b] &7You sent &b%arg 2% &7moneys to &b%arg 1%&7!"
+			add arg 2 to {balance.%arg 1%}
+			send "&b[&eThe Hub MC&b] &7You just received &b%arg 2% &7moneys from &b%player%&7!" to arg 1
+		else:
+			message "&b[&eThe Hub MC&b] &7You cant afford to send that much!"
+command /eco [text] [player] [integer]
+	ailiases: /economy
+	usage: /eco <text> <player> <amount>
+	description: "&b[&eThe Hub MC&b] &7Use /eco or /economy to give, take, or reset a players balance!"
+	permission: balance.eco
+	permission message: "&4&lSorry!&c but it seems as if you do not have to required permissions to permform this command."
+	trigger:
+		if arg-1 is "give":
+			add arg-3 to {balance.%arg-2%}
+			send "&b[&eThe Hub MC&e] &7You have just been given &b%arg-3% &7moneys! Have a great day!" to arg-2
+			message "&b[&eThe Hub MC&b] &7The transaction was successfull! &b%arg-3% &7moneys has been given to &b%arg-2%&7!"
+		if arg-1 is "take":
+			subtract arg-3 from {balance.%arg-2%}
+			send "&b[&eThe Hub MC&b] &b%arg-3% &7moneys has been taken from your account!" to arg-2
+			message "&b[&eThe Hub MC&b] &b%arg-3% &7moneys has been taken from &b%player%'s &7balance. Have a nice day!"
+		if arg-1 is "reset":
+			set %{balance.%arg-2%} to 0
+			send "&b[&eThe Hub MC&b] &7Your balance has been reset!" to arg-2
+			message "&b[&eThe Hub MC&b] &b%arg-2%'s balance has been reset! Have a nice day!"
