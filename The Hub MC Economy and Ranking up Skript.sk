@@ -28,7 +28,7 @@ command /pay <player> <integer>:
 			send "&b[&eThe Hub MC&b] &7You just received &b%arg 2% &7moneys from &b%player%&7!" to arg 1
 		else:
 			message "&b[&eThe Hub MC&b] &7You cant afford to send that much!"
-command /eco [text] [player] [integer]:
+command /eco <text> <player> [integer]:
 	ailiases: /economy
 	usage: /eco <text> <player> <amount>
 	description: "&b[&eThe Hub MC&b] &7Use /eco or /economy to give, take, or reset a players balance!"
